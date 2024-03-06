@@ -15,68 +15,78 @@ class StokSeeder extends Seeder
     {
         $data = [
             [
+                'stok_id' => 1,
                 'barang_id' =>21,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
             [
+                'stok_id' => 2,
                 'barang_id' =>22,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
             [
+                'stok_id' => 3,
                 'barang_id' =>23,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
             [
+                'stok_id' => 4,
                 'barang_id' =>24,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
             [
+                'stok_id' => 5,
                 'barang_id' =>25,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
             [
+                'stok_id' => 6,
                 'barang_id' =>26,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
             [
+                'stok_id' => 7,
                 'barang_id' =>27,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
                 [
+                'stok_id' => 8,
                 'barang_id' =>28,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
                 [
+                'stok_id' => 9,
                 'barang_id' =>29,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
                 [
+                'stok_id' => 10,
                 'barang_id' => 30,
-                'users_id' => 3,
+                'user_id' => 3,
                 'stok_tanggal' => '2024-01-01',
                 'stok_jumlah' => 30 ,
                 ],
             //$table->unsignedBigInteger('stok_id');
             //$table->unsignedBigInteger('barang_id')->index();
-            //$table->unsignedBigInteger('users_id')->index();
+            //$table->unsignedBigInteger('user_id')->index();
             //$table->date('stok_tanggal');
             //$table->integer('stok_jumlah');
 
