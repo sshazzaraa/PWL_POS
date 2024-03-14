@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -22,11 +23,22 @@ class UsersController extends Controller
 
         $users->username = 'manager12';
 
-        $users->wasChanged(); //true
-        $users->wasChanged('username'); //true
-        $users->wasChanged(['username', 'level_id']); //true
-        $users->wasChanged('nama'); //false
-        $users->wasChanged(['nama', 'username']); //true
+        //$users->isDirty(); //true
+        //$users->isDirty('username'); //true
+        //$users->isDirty('nama'); //false
+        //$users->isDirty(['nama', 'username']); //true
 
+        //$users->isClean();
+        //$users->isClean('username');
+        //$users->isClean('nama');
+        //$users->isClean(['nama', 'username']);
+
+        $users->save();
+
+        $users->wasChanged();
+        $users->wasChanged('username');
+        $users->wasChanged('username', 'level_id');
+        $users->wasChanged('nama');
+        dd($users->wasChanged(['nama', 'username',]));
     }
 }
