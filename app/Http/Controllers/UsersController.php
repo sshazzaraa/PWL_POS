@@ -7,38 +7,31 @@ use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
+        // Buat pengguna baru
+        $user = UserModel::create([
+            'username' => 'manager11',
+            'nama' => 'Manager11',
+            'password' => hash::make('12345'),
+            'level_id' => 2,
+        ]);
 
-        $users = UserModel::create(
-            [
-                'username' => 'manager11',
-                'nama' => 'Manager11',
-                'password' => Hash::make('12345'),
-                'level_id' => 2,
-            ]
-        );
+        // Ubah username pengguna yang sudah ada
+        $user->username = 'manager12';
 
-        $users->username = 'manager12';
+        // Simpan perubahan
+        $user->save();
 
-        //$users->isDirty(); //true
-        //$users->isDirty('username'); //true
-        //$users->isDirty('nama'); //false
-        //$users->isDirty(['nama', 'username']); //true
+        // Periksa apakah ada perubahan pada pengguna
+        $wasChangedAll = $user->wasChanged(); // true, karena ada perubahan
+        $wasChangedUsername = $user->wasChanged('username'); // true, karena username berubah
+        $wasChangedUsernameLevelId = $user->wasChanged(['username', 'level_id']); // true, karena username atau level_id berubah
+        $wasChangedNama = $user->wasChanged('nama'); // false, karena nama tidak berubah
 
-        //$users->isClean();
-        //$users->isClean('username');
-        //$users->isClean('nama');
-        //$users->isClean(['nama', 'username']);
-
-        $users->save();
-
-        $users->wasChanged();
-        $users->wasChanged('username');
-        $users->wasChanged('username', 'level_id');
-        $users->wasChanged('nama');
-        dd($users->wasChanged(['nama', 'username',]));
+        // Output hasil
+        dd($wasChangedAll, $wasChangedUsername, $wasChangedUsernameLevelId, $wasChangedNama);
     }
 }
