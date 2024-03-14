@@ -16,14 +16,23 @@ class UsersController extends Controller
 
     public function tambah_simpan(Request $request)
     {
-        UserModel::create(
-            [
-                'username' => $request->username,
-                'nama' => $request->nama,
-                'password' => Hash::make('$request->password'),
-                'level_id' => $request->level_id
-            ]
-        );
+        // Validasi input
+        $request->validate([
+            'username' => 'required',
+            'nama' => 'required',
+            'password' => 'required',
+            'level_id' => 'required'
+        ]);
+
+        // Buat pengguna baru
+        UserModel::create([
+            'username' => $request->username,
+            'nama' => $request->nama,
+            'password' => Hash::make($request->password),
+            'level_id' => $request->level_id
+        ]);
+
+        // Redirect ke halaman users setelah penyimpanan berhasil
         return redirect('/users');
     }
 }
