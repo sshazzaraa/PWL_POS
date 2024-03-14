@@ -14,8 +14,16 @@ class UsersController extends Controller
         return view('users', ['data' => $users]);
     }
 
-    public function tambah()
+    public function tambah_simpan(Request $request)
     {
-        return view('user_tambah');
+        UserModel::create(
+            [
+                'username' => $request->username,
+                'nama' => $request->nama,
+                'password' => Hash::make('$request->password'),
+                'level_id' => $request->level_id
+            ]
+        );
+        return redirect('/users');
     }
 }
