@@ -10,9 +10,10 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = UserModel::all();
-        return view('users', ['data' => $users]);
+        $users = UserModel::with('level')->get();
+        return view('user', ['data' => $users]);
     }
+
 
     public function tambah()
     {
@@ -35,6 +36,7 @@ class UsersController extends Controller
         $users->save();
         return redirect('/user');
     }
+
     public function hapus($id)
     {
         $users = UserModel::find($id);
