@@ -8,6 +8,7 @@
     <form method="post" action="/user/tambah_simpan">
 
         {{ csrf_field() }}
+        {{ method_feild('PUT')}}
 
         <label>Username</label>
         <input type="text" name="username" placeholder="Masukkan Username">
@@ -17,6 +18,7 @@
         <br>
         <label>Password</label>
         <input type="password" name="password" placeholder="Masukkan Password">
+        value="{{}}"
         <br>
         <label>Level ID</label>
         <input type="number" name="level_id" placeholder="Masukkan ID level">
