@@ -16,15 +16,15 @@
             <th>Aksi</th>
         </tr>
         
-        @foreach ($data as $users)
+        @foreach ($data as $d)
         <tr>
-            <td>{{ $users->users_id }}</td>
-            <td>{{ $users->username }}</td>
-            <td>{{ $users->nama }}</td>
-            <td>{{ $users->level_id }}</td>
+            <td>{{ $d->users_id }}</td>
+            <td>{{ $d->username }}</td>
+            <td>{{ $d->nama }}</td>
+            <td>{{ $d->level_id }}</td>
             <td>
-                <a href="/user/ubah/{{ $users->users_id }}">Ubah</a>
-                <a href="/user/hapus/{{ $users->users_id }}">Hapus</a>
+                <a href="/user/ubah/{{ $d->users_id }}">Ubah</a>
+                <a href="/user/hapus/{{ $d->users_id }}">Hapus</a>
             </td>
         </tr>
         @endforeach
