@@ -13,4 +13,9 @@ class UsersController extends Controller
         $users = UserModel::all();
         return view('users', ['data' => $users]);
     }
+
+    public function tambah()
+    {
+        return view('user_tambah');
+    }
 }
