@@ -305,7 +305,10 @@ return [
             'topnav_right' => true,
         ],
 
+<<<<<<< HEAD
         //m_user
+=======
+>>>>>>> d3edaa27768453c0f510f541b79a24d51beb9bd2
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
