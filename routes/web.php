@@ -22,7 +22,14 @@ Route::get('/', function () {
 });
 
 Route::get('/level', [LevelController::class, 'index']);
-Route::get('/kategori', [KategoriController::class, 'index']);
+
+//route untuk kategori
+Route::prefix('/kategori')->group(function () {
+    Route::get('/', [KategoriController::class, 'index']);
+});
+Route::get('/kategori', [UsersController::class, 'store']);
+Route::get('/kategori/create', [UsersController::class, 'create']);
+
 Route::get('/user', [UsersController::class, 'index']);
 Route::get('/user/tambah', [UsersController::class, 'tambah']);
 Route::get('/user/tambah_simpan', [UsersController::class, 'tambah_simpan']);
