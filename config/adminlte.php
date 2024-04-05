@@ -305,10 +305,6 @@ return [
             'topnav_right' => true,
         ],
 
-<<<<<<< HEAD
-        //m_user
-=======
->>>>>>> d3edaa27768453c0f510f541b79a24d51beb9bd2
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
@@ -336,6 +332,12 @@ return [
             'text' => 'change_password',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
+        ],
+        ['header' => 'DAFTAR HALAMAN'],
+        [
+            'text' => 'Manage Category',
+            'url' => 'kategori/create',
+            'icon' => 'fas fa-fw fa-file',
         ],
         [
             'text' => 'multilevel',
