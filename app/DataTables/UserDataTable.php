@@ -2,8 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Kategori;
-use App\Models\KategoriModel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -13,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class KategoriDataTable extends DataTable
+class UserDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,20 +22,37 @@ class KategoriDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('level_kode', function ($row) {
+                return $row->level->level_kode;
+            })
+            ->addColumn('level_nama', function ($row) {
+                return $row->level->level_nama;
+            })
+            ->addColumn('Show', function ($row) {
+                return '<a class="edit btn btn-primary btn-sm" href="' . route('m_user.show', $row->user_id) . '">show</a>';
+            })
             ->addColumn('Edit', function ($row) {
-                return '<a class="edit btn btn-primary btn-sm" href="' . route('kategori.edit', $row->kategori_id) . '">edit</a>';
+                return '<a class="edit btn btn-primary btn-sm" href="' . route('m_user.edit', $row->user_id) . '">edit</a>';
             })
             ->addColumn('Delete', function ($row) {
-                return '<a class="edit btn btn-danger btn-sm" href="' . route('kategori.delete', $row->kategori_id) . '">delete</a>';
+                $token = csrf_token();
+                $url = route('m_user.destroy', $row->user_id);
+                return <<<HTML
+            <form action="$url" method="POST">
+                <input type="hidden" name="_token" value="$token">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">delete</button>
+            </form>
+            HTML;
             })
-            ->rawColumns(['Edit', 'Delete'])
+            ->rawColumns(['level_kode', 'level_nama', 'Show', 'Edit', 'Delete'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(KategoriModel $model): QueryBuilder
+    public function query(User $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -47,11 +63,11 @@ class KategoriDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('kategori-table')
+            ->setTableId('user-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(1)
+            ->orderBy(2)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -69,11 +85,19 @@ class KategoriDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('kategori_id'),
-            Column::make('kategori_kode'),
-            Column::make('kategori_nama'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('user_id'),
+            Column::make('level_id'),
+            Column::computed('level_kode'),
+            Column::computed('level_nama'),
+            Column::make('username'),
+            Column::make('nama'),
+            Column::computed('Show')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass(
+                    'text-center'
+                ),
             Column::computed('Edit')
                 ->exportable(false)
                 ->printable(false)
@@ -96,6 +120,6 @@ class KategoriDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Kategori_' . date('YmdHis');
+        return 'User_' . date('YmdHis');
     }
 }

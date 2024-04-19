@@ -86,7 +86,6 @@ class BarangController extends Controller
             'harga_jual'    => 'required|integer',
             'kategori_id'   => 'required|integer',
         ]);
-
         BarangModel::create([
             'barang_kode' => $request->barang_kode,
             'barang_nama' => $request->barang_nama,
@@ -150,7 +149,6 @@ class BarangController extends Controller
             'harga_jual'    => 'required|integer',
             'kategori_id'   => 'required|integer',
         ]);
-
         BarangModel::find($id)->update([
             'barang_kode' => $request->barang_kode,
             'barang_nama' => $request->barang_nama,
@@ -158,7 +156,6 @@ class BarangController extends Controller
             'harga_jual' => $request->harga_jual,
             'kategori_id' => $request->kategori_id
         ]);
-
         return redirect('/barang')->with('success', 'Barang Berhasil Diupdate');
     }
 

@@ -4,7 +4,7 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a>
+                <a class="btn btn-sm btn-primary mt-1" href="{{ url('level/create') }}">Tambah</a>
             </div>
         </div>
         <div class="card-body">
@@ -17,8 +17,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Kode Kategori</th>
-                        <th>Nama Kategori</th>
+                        <th>Level Kode</th>
+                        <th>Level Nama</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
             let dataUser = $('#table_level').DataTable({
                 serverSide: true, // True if we want to use Server side processing
                 ajax: {
-                    "url": "{{ url('kategori/list') }}",
+                    "url": "{{ url('level/list') }}",
                     "dataType": "json",
                     "type": "POST",
                 },
@@ -45,13 +45,13 @@
                         searchable: false
                     },
                     {
-                        data: "kategori_kode",
+                        data: "level_kode",
                         className: "",
                         orderable: true, // orderable: true, if we want this column is orderable
                         searchable: true, // searchable: true, if we want this column searchable
                     },
                     {
-                        data: "kategori_nama",
+                        data: "level_nama",
                         className: "",
                         orderable: true, // orderable: true, if we want this column is orderable
                         searchable: true, // searchable: true, if we want this column searchable
