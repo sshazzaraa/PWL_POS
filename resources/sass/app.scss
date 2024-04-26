@@ -1,18 +1,13 @@
-//Fonts
-@import url("https://fonts.bunny.net/css?family=Nunito");
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
 
-// Bootsrap
-<<<<<<< HEAD
 
-@import "bootstrap/scss/bootstrap";
-// DataTables
 
-=======
-@import "bootstrap/scss/bootstrap";
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
 
 // DataTables
->>>>>>> d3edaa27768453c0f510f541b79a24d51beb9bd2
-@import "bootstrap-icons/font/bootstrap-icons.css";
-@import "datatables.net-bs5/css/dataTables.bootstraps5.min.css";
-@import "datatables.net-buttons-bs5/css/buttons.bootstraps5.min.css";
-@import "datatables.net-select-bs5/css/select.bootstraps5.css";
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+@import "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";
+@import 'datatables.net-select-bs5/css/select.bootstrap5.css';

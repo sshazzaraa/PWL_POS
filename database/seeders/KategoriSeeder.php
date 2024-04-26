@@ -15,24 +15,24 @@ class KategoriSeeder extends Seeder
     {
         $data = [
             [
-            'kategori_kode' => 'K1',
-            'kategori_nama' => 'Painting Color',
+            'kategori_kode'=> 'MKN',
+            'kategori_nama' => 'Makanan',
             ],
             [
-                'kategori_kode' => 'K2',
-                'kategori_nama' => 'Brush',
+            'kategori_kode'=> 'MNM',
+            'kategori_nama' => 'Minuman',
             ],
             [
-                'kategori_kode' => 'K3',
-                'kategori_nama' => 'Painting Paper',
+            'kategori_kode'=> 'KUE',
+            'kategori_nama' => 'Cemilan dan Kue',
             ],
             [
-                'kategori_kode' => 'K4',
-                'kategori_nama' => 'Pencil',
+            'kategori_kode'=> 'ICE',
+            'kategori_nama' => 'Ice Cream dan Sundae'
             ],
             [
-                'kategori_kode' => 'K5',
-                'kategori_nama' => 'Drawing Pen',
+            'kategori_kode'=> 'MIE',
+            'kategori_nama' => 'Mie Instan dan Ramen'
             ],
         ];
         DB::table('m_kategori')->insert($data);

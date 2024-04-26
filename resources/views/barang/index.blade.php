@@ -1,4 +1,5 @@
 @extends('layouts.template')
+
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -15,27 +16,28 @@
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-ms-12">
                     <div class="form-group row">
-                        <label for="" class="col-1 control-label col-form-label">Filter : </label>
-                        <div class="col-3">
-                            <select name="kategori_id" id="kategori_id" class="form-control">
+                        <label class="col-4 control-label col-form-label">Filter :</label>
+                        <div class="col-8">
+                            <select name="kategori_id" id="kategori_id" class="form-control" required>
                                 <option value="">- Semua -</option>
                                 @foreach ($kategori as $item)
                                     <option value="{{ $item->kategori_id }}">{{ $item->kategori_nama }}</option>
                                 @endforeach
                             </select>
+                            <small class="form-text text-muted">Kategori Barang</small>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm w-100" id="table_barang">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_barang">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
-                        <th>Kategori Barang</th>
+                        <th>Kategori</th>
                         <th>Harga Beli</th>
                         <th>Harga Jual</th>
                         <th>Aksi</th>
@@ -45,69 +47,71 @@
         </div>
     </div>
 @endsection
+
 @push('css')
 @endpush
 @push('js')
-    <script>
-        $(document).ready(function() {
-            let dataUser = $('#table_barang').DataTable({
-                serverSide: true, // True if we want to use Server side processing
-                ajax: {
-                    "url": "{{ url('barang/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function(d) {
-                        d.kategori_id = $('#kategori_id').val();
-                    }
+<script>
+    $(document).ready(function() {
+        var dataBarang = $('#table_barang').DataTable({
+            processing: true,
+            serverSide : true,
+            ajax: {
+                "url": "{{ url('barang/list') }}",
+                "dataType": "json",
+                "type": "POST",
+                "data": function (d) {
+                    d.kategori_id = $('#kategori_id').val();
+                }
+            },
+            columns: [
+                {
+                    data: "DT_RowIndex",
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false
                 },
-                columns: [{
-                        data: "DT_RowIndex", // numbering from laravel datatables addIndexColumn() function
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "barang_kode",
-                        className: "",
-                        orderable: true, // orderable: true, if we want this column is orderable
-                        searchable: true, // searchable: true, if we want this column searchable
-                    },
-                    {
-                        data: "barang_nama",
-                        className: "",
-                        orderable: true, // orderable: true, if we want this column is orderable
-                        searchable: true, // searchable: true, if we want this column searchable
-                    },
-                    {
-                        data: "kategori.kategori_nama",
-                        className: "",
-                        orderable: false, // orderable: false, if we want this column not orderable
-                        searchable: false // searchable: false, if we want this column not searchable
-                    },
-                    {
-                        data: "harga_beli",
-                        className: "",
-                        orderable: true, // orderable: true, if we want this column is orderable
-                        searchable: true, // searchable: true, if we want this column searchable
-                    },
-                    {
-                        data: "harga_jual",
-                        className: "",
-                        orderable: true, // orderable: true, if we want this column is orderable
-                        searchable: true, // searchable: true, if we want this column searchable
-                    },
-                    {
-                        data: "aksi",
-                        className: "",
-                        orderable: false, // orderable: false, if we want this column not orderable
-                        searchable: false // searchable: false, if we want this column not searchable
-                    }
-                ]
-            });
-
-            $('#kategori_id').on('change', function() {
-                dataUser.ajax.reload();
-            });
+                {
+                    data: "barang_kode",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "barang_nama",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "kategori.kategori_nama",
+                    className: "",
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: "harga_beli",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "harga_jual",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "aksi",
+                    className: "",
+                    orderable: false,
+                    searchable: false
+                }
+            ]
         });
-    </script>
+        $('#kategori_id').on('change', function() {
+            dataBarang.ajax.reload();
+        });
+    });
+</script>
 @endpush

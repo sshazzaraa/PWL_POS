@@ -2,29 +2,34 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\BarangController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\BarangModel;
+use App\Models\UserModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StokModel extends Model
 {
     use HasFactory;
 
-    use HasFactory;
-
     protected $table = 't_stok';
+
     protected $primaryKey = 'stok_id';
 
-    protected $guarded = 'stok_id';
+    protected $fillable = [
+        'barang_id',
+        'user_id',
+        'stok_tanggal',
+        'stok_jumlah',
+    ];
 
-    function barang(): BelongsTo
+    public function user() : BelongsTo
     {
-        return $this->belongsTo(BarangController::class, 'barang_id', 'barang_id');
+        return $this->belongsTo(UserModel::class, 'user_id', 'user_id');
     }
 
-    function user(): BelongsTo
+    public function barang() : BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'user_id');
+        return $this->belongsTo(BarangModel::class, 'barang_id', 'barang_id');
     }
 }

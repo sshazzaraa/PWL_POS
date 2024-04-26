@@ -333,12 +333,6 @@ return [
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        ['header' => 'DAFTAR HALAMAN'],
-        [
-            'text' => 'Manage Category',
-            'url' => 'kategori/create',
-            'icon' => 'fas fa-fw fa-file',
-        ],
         [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
@@ -392,6 +386,12 @@ return [
             'text' => 'information',
             'icon_color' => 'cyan',
             'url' => '#',
+        ],
+        ['header' => 'DAFTAR HALAMAN'],
+        [
+            'text' => 'Manage Category',
+            'url' => 'kategori/create',
+            'icon' => 'fas fa-fw fa-file',
         ],
     ],
 

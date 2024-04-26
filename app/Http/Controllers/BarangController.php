@@ -11,7 +11,7 @@ class BarangController extends Controller
 {
     public function index()
     {
-        $breadcrumb = (object) [
+        $breadcrumb =(object) [
             'title' => 'Daftar Barang',
             'list' => ['Home', 'Barang'],
         ];
@@ -22,9 +22,9 @@ class BarangController extends Controller
 
         $activeMenu = 'barang';
 
-        $kategori = KategoriModel::all();
+        $kategori= KategoriModel::all();
 
-        return view('barang.index', [
+        return view('barang.index',[
             'breadcrumb' => $breadcrumb,
             'page' => $page,
             'activeMenu' => $activeMenu,
@@ -54,9 +54,8 @@ class BarangController extends Controller
             ->make(true);
     }
 
-    public function create()
-    {
-        $breadcrumb = (object)[
+    public function create(){
+        $breadcrumb =(object)[
             'title' => 'Tambah Barang',
             'list' => ['Home', 'Barang', 'Tambah']
         ];
@@ -77,8 +76,7 @@ class BarangController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'barang_kode'   => 'required|unique:m_barang,barang_kode',
             'barang_nama'   => 'required|max:100',
@@ -96,11 +94,10 @@ class BarangController extends Controller
         return redirect('/barang')->with('success', 'Barang Berhasil Ditambahkan');
     }
 
-    public function show(string $id)
-    {
+    public function show(string $id){
         $barang = BarangModel::with('kategori')->find($id);
 
-        $breadcrumb = (object)[
+        $breadcrumb =(object)[
             'title' => 'Detail',
             'list' => ['Home', 'Barang', 'Detail']
         ];
@@ -117,12 +114,11 @@ class BarangController extends Controller
         ]);
     }
 
-    public function edit($id)
-    {
+    public function edit($id){
         $barang = BarangModel::find($id);
         $kategori = KategoriModel::all();
 
-        $breadcrumb = (object)[
+        $breadcrumb =(object)[
             'title' => 'Edit',
             'list' => ['Home', 'Barang', 'Edit']
         ];
@@ -140,10 +136,9 @@ class BarangController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $request->validate([
-            'barang_kode'   => 'required|unique:m_barang,barang_kode,' . $id . ',barang_id',
+            'barang_kode'   => 'required|unique:m_barang,barang_kode,'.$id.',barang_id',
             'barang_nama'   => 'required|max:100',
             'harga_beli'    => 'required|integer',
             'harga_jual'    => 'required|integer',
@@ -159,10 +154,9 @@ class BarangController extends Controller
         return redirect('/barang')->with('success', 'Barang Berhasil Diupdate');
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id){
         $check = BarangModel::find($id);
-        if (!$check) {
+        if(!$check){
             return redirect('/barang')->with('error', 'Data Barang tidak ditemukan');
         }
         try {

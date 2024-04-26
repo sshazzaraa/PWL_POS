@@ -3,63 +3,64 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Models\LevelModel;
 use App\Models\User;
 use App\Models\UserModel;
-use App\Models\LevelModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
-    //     public function index()
-    //     {
-    //         $user = UserModel::with('level')->get();
-    //         return view('user', ['data' =>$user]);
+    // public function index() {
+    //     $user = UserModel::with('level')->get();
+    //     return view('user', ['data' => $user] );
     //     }
-    //     public function tambah()
-    //     {
-    //         return view('user_tambah');
-    //     }
-    //     public function tambah_simpan(Request $request)
-    //     {
-    //         UserModel::create([
-    //             'username'=> $request->username,
-    //             'nama' => $request->nama,
-    //             'password' => Hash::make($request->password),
-    //             'level' => $request->level_id
-    //         ]);
-    //         return redirect('/user');
-    //     }
-    //     public function ubah($id)
-    //     {
-    //             $user = UserModel::find($id);
-    //             return view('user_ubah', ['data' => $user]
-    //         );
-    //     }
-    //     public function ubah_simpan($id, Request $request)
-    //     {
-    //     $user = UserModel::find($id);
 
+    // public function tambah() {
+    //     return view('user_tambah');
+    // }  
+
+    // public function tambah_simpan(Request $request)
+    // {
+    //     UserModel::create([
+    //         'username' => $request->username,
+    //         'nama' => $request->nama,
+    //         'password' => Hash::make($request->password),
+    //         'level_id' => $request->level_id
+    //     ]);
+    //     return redirect('/user');
+    // }
+
+    // public function tambah_simpan(StorePostRequest $request): RedirectResponse
+    // {
+    //     $validated = $request->validated();
+    //     $validated = $request->safe()->only('username', 'nama', 'password', 'level_id');
+    //     $validated = $request->safe()->except('username', 'nama', 'password', 'level_id');
+    //     return redirect('/user');
+    // }
+    // public function ubah($id){
+    //     $user = UserModel::find($id);
+    //     return view('user_ubah', ['data' => $user]);
+    // }
+    // public function ubah_simpan ($id, Request $request){
+    //     $user = UserModel::find($id);
     //     $user->username = $request->username;
     //     $user->nama = $request->nama;
-    //     $user->password = Hash::make($request->password);
+    //     $user->password = Hash::make('$request->password');
     //     $user->level_id = $request->level_id;
-
     //     $user->save();
+    //     return redirect('/user');
+    // }
+    // public function hapus($id){
+    //     $user = UserModel::find($id);
+    //     $user -> delete();
 
     //     return redirect('/user');
-    //     }
-    //     public function hapus($id)
-    //     {
-    //         $user = UserModel::find($id);
-    //         $user->delete();
+    // }
 
-    //         return  redirect('/user');
-
-    //     }   
-
+    // Jobsheet 7
     public function index()
     {
         $breadcrumb = (object)[
@@ -73,20 +74,22 @@ class UserController extends Controller
 
         $level = LevelModel::all();
 
-        return view('user.index', [
+        return view('m_user.index', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
             'activeMenu' => $activeMenu,
             'level' => $level
         ]);
-    }
 
+        
+    }
+    // Ambil data user dalam bentuk json untuk datatables
     public function list(Request $request)
     {
         $users = UserModel::select('user_id', 'username', 'nama', 'level_id')
             ->with('level');
 
-
+        // Filter data user berdasarkan level_id
         if ($request->level_id) {
             $users->where('level_id', $request->level_id);
         }
@@ -98,7 +101,7 @@ class UserController extends Controller
                 $btn .= '<a href="' . url('/user/' . $user->user_id . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> ';
                 $btn .= '<form class="d-inline-block" method="POST" action="' . url('/user/' . $user->user_id) . '">'
                     . csrf_field() . method_field('DELETE') .
-                    '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
+                    '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakit menghapus data ini?\');">Hapus</button></form>';
                 return $btn;
             })
             ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html
@@ -119,7 +122,7 @@ class UserController extends Controller
         $level = LevelModel::all();
         $activeMenu = 'user';
 
-        return view('user.create', [
+        return view('m_user.create', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
             'level' => $level,
@@ -161,7 +164,7 @@ class UserController extends Controller
 
         $activeMenu = 'user';
 
-        return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'activeMenu' => $activeMenu]);
+        return view('m_user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'activeMenu' => $activeMenu]);
     }
 
     public function edit(string $id)
@@ -179,15 +182,8 @@ class UserController extends Controller
         ];
         $activeMenu = 'user';
 
-        return view('user.edit', [
-            'breadcrumb' => $breadcrumb,
-            'page' => $page,
-            'user' => $user,
-            'level' => $level,
-            'activeMenu' => $activeMenu
-        ]);
+        return view('m_user.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
-
 
     public function update(Request $request, string $id)
     {

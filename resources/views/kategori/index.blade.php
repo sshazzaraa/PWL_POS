@@ -1,4 +1,5 @@
 @extends('layouts.template')
+
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -10,15 +11,16 @@
         <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
-            @elseif(session('error'))
+            @endif
+            @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_level">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_kategori">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Kode Kategori</th>
-                        <th>Nama Kategori</th>
+                        <th>Kategori Kode</th>
+                        <th>Kategori Nama</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -26,43 +28,40 @@
         </div>
     </div>
 @endsection
+
 @push('css')
 @endpush
 @push('js')
     <script>
         $(document).ready(function() {
-            let dataUser = $('#table_level').DataTable({
-                serverSide: true, // True if we want to use Server side processing
+            var dataKategori = $('#table_kategori').DataTable({
+                serverSide: true,
                 ajax: {
                     "url": "{{ url('kategori/list') }}",
                     "dataType": "json",
                     "type": "POST",
                 },
                 columns: [{
-                        data: "DT_RowIndex", // numbering from laravel datatables addIndexColumn() function
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "kategori_kode",
-                        className: "",
-                        orderable: true, // orderable: true, if we want this column is orderable
-                        searchable: true, // searchable: true, if we want this column searchable
-                    },
-                    {
-                        data: "kategori_nama",
-                        className: "",
-                        orderable: true, // orderable: true, if we want this column is orderable
-                        searchable: true, // searchable: true, if we want this column searchable
-                    },
-                    {
-                        data: "aksi",
-                        className: "",
-                        orderable: false, // orderable: false, if we want this column not orderable
-                        searchable: false // searchable: false, if we want this column not searchable
-                    }
-                ]
+                    data: "DT_RowIndex",
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false
+                }, {
+                    data: "kategori_kode",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                }, {
+                    data: "kategori_nama",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                }, {
+                    data: "aksi",
+                    className: "",
+                    orderable: false,
+                    searchable: false
+                }]
             });
         });
     </script>

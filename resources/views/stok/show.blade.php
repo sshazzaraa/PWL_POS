@@ -14,32 +14,28 @@
             @else
                 <table class="table table-bordered table-striped table-hover table-sm">
                     <tr>
-                        <th>Stok ID</th>
+                        <th>ID</th>
                         <td>{{ $stok->stok_id }}</td>
                     </tr>
                     <tr>
-                        <th>Pengelola</th>
-                        <td>{{ $stok->user->nama }}</td>
+                        <th>Nama User</th>
+                        <td>{{ $stok->user->username }}</td>
                     </tr>
                     <tr>
-                        <th>Barang Kode</th>
-                        <td>{{ $stok->barang->barang_kode }}</td>
-                    </tr>
-                    <tr>
-                        <th>Barang Nama</th>
+                        <th>Nama Barang</th>
                         <td>{{ $stok->barang->barang_nama }}</td>
                     </tr>
                     <tr>
-                        <th>Tanggal</th>
+                        <th>tanggal</th>
                         <td>{{ $stok->stok_tanggal }}</td>
                     </tr>
                     <tr>
-                        <th>Jumlah</th>
+                        <th>Stok</th>
                         <td>{{ $stok->stok_jumlah }}</td>
                     </tr>
                 </table>
             @endempty
-            <a href="{{ url('stok') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+            <a href="{{ url('stok') }}" class="btn btn-sm btn-default mt- 2">Kembali</a>
         </div>
     </div>
 @endsection

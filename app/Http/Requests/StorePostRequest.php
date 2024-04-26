@@ -3,16 +3,18 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StorePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -21,10 +23,14 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kodeKategori' => 'required',
-            'namaKategori' => 'required',
-            'kategori_kode' => 'required|string|max:10',
-            'kategori_nama' => 'required|string|max:100',
+            'kategori_kode' => 'required',
+            'kategori_nama' => 'required',
+            'nama' => 'required',
+            'level_id' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'level_kode' => 'required',
+            'level_nama' => 'required',
         ];
     }
 }
